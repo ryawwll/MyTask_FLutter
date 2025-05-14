@@ -96,6 +96,7 @@ class __ContentState extends State<_Content> {
                           ),
                           SizedBox(height: 5),
                           TextField(
+                            controller: nameControlller,
                             keyboardType: TextInputType.emailAddress,
                             decoration: InputDecoration(
                               hintText: 'Enter your name',
@@ -126,6 +127,7 @@ class __ContentState extends State<_Content> {
                           ),
                           SizedBox(height: 5),
                           TextField(
+                            controller: emailController,
                             keyboardType: TextInputType.emailAddress,
                             decoration: InputDecoration(
                               hintText: 'example@gmail.com',
@@ -156,6 +158,7 @@ class __ContentState extends State<_Content> {
                           ),
                           SizedBox(height: 5),
                           TextField(
+                            controller: passwordController,
                             keyboardType: TextInputType.text,
                             obscureText: !passwordVisible,
                             decoration: InputDecoration(
@@ -199,6 +202,7 @@ class __ContentState extends State<_Content> {
                           ),
                           SizedBox(height: 5),
                           TextField(
+                            controller: confirmPasswordController,
                             keyboardType: TextInputType.text,
                             obscureText: !confirmPasswordVisible,
                             decoration: InputDecoration(
@@ -245,11 +249,11 @@ class __ContentState extends State<_Content> {
                                 password_confirmation:
                                     confirmPasswordController.text,
                               );
-                              Navigator.of(context).pushReplacement(
-                                MaterialPageRoute(
-                                  builder: (context) => TaskScreen(),
-                                ),
-                              );
+                              // Navigator.of(context).pushReplacement(
+                              //   MaterialPageRoute(
+                              //     builder: (context) => TaskScreen(),
+                              //   ),
+                              // );
                             },
                             height: 45,
                             width: double.infinity,

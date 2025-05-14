@@ -30,15 +30,19 @@ class AuthService {
         },
       );
 
-      final registerResponse = RegisterResponModel.fromJson(response.data);
+      final registerResponse = RegisterResponModel.fromMap(response.data);
+      print(registerResponse.toString());
       return Right(registerResponse);
     } on DioException catch (e) {
+      print(e.response?.toString());
+      print(e.message);
       if (e.response != null) {
         return Left(e.response?.data['message'] ?? 'Registration failed');
       } else {
         return Left(e.message ?? 'Network error');
       }
     } catch (e) {
+      print(e.toString());
       return Left('An unexpected error occurred');
     }
   }

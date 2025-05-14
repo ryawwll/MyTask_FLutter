@@ -14,10 +14,10 @@ class AuthCubit extends Cubit<AuthState> {
     emit(state.copyWith(isLoading: true));
 
     var data = await AuthService().register(
-      name: 'Upin',
-      email: 'Upin@gmail.com',
-      password: 'Upin12345',
-      passwordConfirmation: 'Upin12345',
+      name: name,
+      email: email,
+      password: password,
+      passwordConfirmation: password_confirmation,
     );
 
     data.fold((left) => emit(state.copyWith(errorMessage: left)), (right) {
