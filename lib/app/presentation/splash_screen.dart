@@ -35,7 +35,9 @@ class SplashScreen extends StatelessWidget {
                 child: Appbutton(
                   label: 'Get Start',
                   color: Appcolors.basic2Color,
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/sign in');
+                  },
                   height: 45,
                   width: double.infinity,
                 ),
