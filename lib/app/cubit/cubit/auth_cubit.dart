@@ -9,7 +9,7 @@ class AuthCubit extends Cubit<AuthState> {
    required String name,
    required String email,
    required String password,
-   required String passwordConfirmation,
+   required String password_confirmation,
   }) async {
     emit(state.copyWith(isLoading: true));
 
@@ -17,7 +17,7 @@ class AuthCubit extends Cubit<AuthState> {
       name: 'Upin',
       email: 'Upin@gmail.com',
       password: 'Upin12345',
-      passwordConfirmation: 'Upin12345',
+      password_confirmation: 'Upin12345',
     );
 
     data.fold((left) => emit(state.copyWith(errorMessage: left)), (right) {

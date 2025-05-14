@@ -17,7 +17,7 @@ class AuthService {
     required String name,
     required String email,
     required String password,
-    required String passwordConfirmation,
+    required String password_confirmation,
   }) async {
     try {
       final response = await _dio.post(
@@ -26,7 +26,7 @@ class AuthService {
           'name': name,
           'email': email,
           'password': password,
-          'password_confirmation': passwordConfirmation,
+          'password_confirmation': password_confirmation,
         },
       );
 

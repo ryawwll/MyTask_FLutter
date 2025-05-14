@@ -233,7 +233,7 @@ class __ContentState extends State<_Content> {
                                 name: nameControlller.text,
                                 email: emailController.text,
                                 password: passwordController.text,
-                                passwordConfirmation:
+                                password_confirmation:
                                     confirmPasswordController.text,
                               );
                               Navigator.of(context).pushReplacement(
