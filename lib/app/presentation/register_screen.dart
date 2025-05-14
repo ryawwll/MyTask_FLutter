@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lapanganku/app/core/appColors.dart';
 import 'package:lapanganku/app/core/components/appButton.dart';
 import 'package:lapanganku/app/cubit/cubit/auth_cubit.dart';
+import 'package:lapanganku/app/presentation/task_screen.dart';
 
 class RegisterScreen extends StatelessWidget {
   const RegisterScreen({super.key});
@@ -225,43 +226,24 @@ class __ContentState extends State<_Content> {
                           ),
                           SizedBox(height: 50),
                           Appbutton(
-                            label: 'Login',
+                            label: 'Register',
                             color: Appcolors.basicColor,
                             onPressed: () {
                               context.read<AuthCubit>().doRegister(
-                                name :nameControlller.text,
-                                email : emailController.text,
+                                name: nameControlller.text,
+                                email: emailController.text,
                                 password: passwordController.text,
-                                passwordConfirmation: confirmPasswordController.text,
+                                passwordConfirmation:
+                                    confirmPasswordController.text,
+                              );
+                              Navigator.of(context).pushReplacement(
+                                MaterialPageRoute(
+                                  builder: (context) => TaskScreen(),
+                                ),
                               );
                             },
                             height: 45,
                             width: double.infinity,
-                          ),
-                          SizedBox(height: 5),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                'don\'t have an account?',
-                                style: TextStyle(
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w400,
-                                  color: Colors.black,
-                                ),
-                              ),
-                              TextButton(
-                                onPressed: () {},
-                                child: Text(
-                                  'Sign up',
-                                  style: TextStyle(
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w400,
-                                    color: Color(0xff008ADF),
-                                  ),
-                                ),
-                              ),
-                            ],
                           ),
                         ],
                       ),

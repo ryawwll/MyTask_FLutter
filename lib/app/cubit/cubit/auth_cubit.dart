@@ -5,7 +5,7 @@ import 'package:lapanganku/data/datasource/service/auth_service.dart';
 class AuthCubit extends Cubit<AuthState> {
   AuthCubit() : super(AuthState());
 
-  Future<void> doRegister({
+  Future<void> doRegister ({
    required String name,
    required String email,
    required String password,
