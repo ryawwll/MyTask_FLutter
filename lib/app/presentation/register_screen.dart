@@ -34,6 +34,15 @@ class __ContentState extends State<_Content> {
   bool confirmPasswordVisible = false;
 
   @override
+  void dispose() {
+    nameControlller.dispose();
+    emailController.dispose();
+    passwordController.dispose();
+    confirmPasswordController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
