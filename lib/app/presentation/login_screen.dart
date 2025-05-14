@@ -189,7 +189,9 @@ class _ContentState extends State<_Content> {
                                 ),
                               ),
                               TextButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  Navigator.of(context).pushNamed('/signup');
+                                },
                                 child: Text(
                                   'Sign up',
                                   style: TextStyle(

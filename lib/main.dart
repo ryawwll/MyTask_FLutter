@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:lapanganku/app/presentation/login_screen.dart';
+import 'package:lapanganku/app/presentation/register_screen.dart';
 import 'package:lapanganku/app/presentation/splash_screen.dart';
 
 void main() {
@@ -17,8 +18,9 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       initialRoute: '/',
       routes: {
-        '/': (context) => SplashScreen(),
-        '/sign in': (context) => LoginScreen(),
+        '/': (context) => const SplashScreen(),
+        '/signin': (context) => const LoginScreen(),
+        '/signup': (context) => const RegisterScreen(),
       },
     );
   }

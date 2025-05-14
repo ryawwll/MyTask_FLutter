@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
 class Appbutton extends StatelessWidget {
-     Appbutton({
+  Appbutton({
     super.key,
     required this.label,
     required this.color,
     this.onPressed,
     required this.height,
-    required this.width
+    required this.width,
   });
 
   final String label;
@@ -29,7 +29,7 @@ class Appbutton extends StatelessWidget {
           ),
         ),
 
-        onPressed: () {},
+        onPressed: onPressed,
         child: Text(
           label,
           style: TextStyle(

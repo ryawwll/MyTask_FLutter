@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lapanganku/app/core/appColors.dart';
 import 'package:lapanganku/app/core/components/appButton.dart';
+import 'package:lapanganku/app/presentation/login_screen.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
@@ -36,7 +37,9 @@ class SplashScreen extends StatelessWidget {
                   label: 'Get Start',
                   color: Appcolors.basic2Color,
                   onPressed: () {
-                    Navigator.pushNamed(context, '/sign in');
+                    Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(builder: (context) => LoginScreen()),
+                    );
                   },
                   height: 45,
                   width: double.infinity,
