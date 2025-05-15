@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lapanganku/app/core/appColors.dart';
 import 'package:lapanganku/app/core/components/appButton.dart';
-import 'package:lapanganku/app/cubit/cubit/auth_cubit.dart';
-import 'package:lapanganku/app/cubit/cubit/auth_state.dart';
+import 'package:lapanganku/app/cubit/auth_cubit/auth_cubit.dart';
+import 'package:lapanganku/app/cubit/auth_cubit/auth_state.dart';
 import 'package:lapanganku/app/presentation/login_screen.dart';
 
 class RegisterScreen extends StatelessWidget {
