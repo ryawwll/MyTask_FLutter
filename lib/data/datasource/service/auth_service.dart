@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:either_dart/either.dart';
+import 'package:lapanganku/data/model/login_respon_model/login_respon_model.dart';
 import 'package:lapanganku/data/model/register_respon_model/register_respon_model.dart';
 
 class AuthService {
@@ -31,18 +32,40 @@ class AuthService {
       );
 
       final registerResponse = RegisterResponModel.fromMap(response.data);
-      print(registerResponse.toString());
       return Right(registerResponse);
     } on DioException catch (e) {
-      print(e.response?.toString());
-      print(e.message);
       if (e.response != null) {
         return Left(e.response?.data['message'] ?? 'Registration failed');
       } else {
         return Left(e.message ?? 'Network error');
       }
     } catch (e) {
-      print(e.toString());
+      return Left('An unexpected error occurred');
+    }
+  }
+
+  Future<Either<String, LoginResponModel>> login({
+    required String email,
+    required String password,
+  }) async {
+    try {
+      final response = await _dio.post(
+       'https://mytask.ukasyaaah.my.id/api/user/login',
+        data: {"email": email, "password": password},
+      );
+      print(response.data);
+
+      final loginResponse = LoginResponModel.fromMap(response.data);
+      return Right(loginResponse);
+    } on DioException catch (e) {
+      print(e.response?.data.toString());
+      print(e.message.toString());
+      if (e.response != null) {
+        return Left(e.response?.data['message'] ?? 'Login failed');
+      } else {
+        return Left(e.message ?? 'Network error');
+      }
+    } catch (e) {
       return Left('An unexpected error occurred');
     }
   }

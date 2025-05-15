@@ -5,6 +5,7 @@ import 'package:lapanganku/app/presentation/login_screen.dart';
 import 'package:lapanganku/app/presentation/register_screen.dart';
 import 'package:lapanganku/app/presentation/splash_screen.dart';
 import 'package:hive/hive.dart';
+import 'package:lapanganku/app/presentation/task_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -25,6 +26,7 @@ class MyApp extends StatelessWidget {
         '/': (context) => const SplashScreen(),
         '/signin': (context) => const LoginScreen(),
         '/signup': (context) => const RegisterScreen(),
+        '/taskscreen': (context) => const TaskScreen(),
       },
     );
   }

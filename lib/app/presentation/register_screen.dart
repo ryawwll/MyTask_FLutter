@@ -5,7 +5,6 @@ import 'package:lapanganku/app/core/components/appButton.dart';
 import 'package:lapanganku/app/cubit/cubit/auth_cubit.dart';
 import 'package:lapanganku/app/cubit/cubit/auth_state.dart';
 import 'package:lapanganku/app/presentation/login_screen.dart';
-import 'package:lapanganku/app/presentation/task_screen.dart';
 
 class RegisterScreen extends StatelessWidget {
   const RegisterScreen({super.key});
@@ -54,16 +53,17 @@ class __ContentState extends State<_Content> {
       listener: (context, state) {
         if (state.registerResponModel.accessToken != null) {
           Navigator.of(context).pushReplacement(
-            MaterialPageRoute(
-              builder: (context) => LoginScreen(),
-            ),
-          );  
+            MaterialPageRoute(builder: (context) => LoginScreen()),
+          );
         }
 
         if (state.errorMessage != "") {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: Text(state.errorMessage),
+              content: Text(
+                state.errorMessage,
+                style: TextStyle(color: Colors.white),
+              ),
               backgroundColor: Colors.red,
             ),
           );
