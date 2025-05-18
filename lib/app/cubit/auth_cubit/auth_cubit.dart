@@ -39,7 +39,7 @@ class AuthCubit extends Cubit<AuthState> {
     data.fold((left) => emit(state.copyWith(errorMessage: left)), (right) {
       emit(state.copyWith(loginResponModel: right));
       print('token from state : ${state.loginResponModel.token}');
-      LocalStrorage.saveToken(right.token ?? '');
+      LocalStrorage().saveToken(right.token ?? '');
     });   
 
     emit(state.copyWith(isLoading: false));

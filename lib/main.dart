@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:lapanganku/app/presentation/answer_screen.dart';
 
 import 'package:lapanganku/app/presentation/login_screen.dart';
 import 'package:lapanganku/app/presentation/register_screen.dart';
@@ -10,7 +11,7 @@ import 'package:lapanganku/app/presentation/task_screen.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
-  Hive.openBox('user');
+  await Hive.openBox('user');
   runApp(const MyApp());
 }
 
@@ -27,6 +28,7 @@ class MyApp extends StatelessWidget {
         '/signin': (context) => const LoginScreen(),
         '/signup': (context) => const RegisterScreen(),
         '/taskscreen': (context) => const TaskScreen(),
+        '/answerscreen': (context) => const AnswerScreen(),
       },
     );
   }
