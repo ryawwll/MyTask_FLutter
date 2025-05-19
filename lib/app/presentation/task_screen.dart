@@ -129,11 +129,14 @@ class _ContentState extends State<_Content> {
                             ],
                           ),
                           onTap: () {
+                            final task = state.taskList[index];
                             Navigator.push(
                               context,
                               MaterialPageRoute(
                                 builder:
-                                    (context) => AnswerScreen(),
+                                    (context) => AnswerScreen(
+                                      task : task,
+                                    ),
                               ),
                             );
                           },

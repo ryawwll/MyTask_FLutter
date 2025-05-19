@@ -1,15 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:lapanganku/app/core/appColors.dart';
 import 'package:lapanganku/app/core/components/appButton.dart';
+import 'package:lapanganku/data/model/task_model/task_model.dart';
 
 class AnswerScreen extends StatefulWidget {
-  const AnswerScreen({super.key});
+  AnswerScreen({super.key, required this.task});
+
+  final TaskModel task;
+  final TextEditingController answerController = TextEditingController();
 
   @override
   State<AnswerScreen> createState() => _AnswerScreenState();
 }
 
 class _AnswerScreenState extends State<AnswerScreen> {
+
+  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,7 +55,7 @@ class _AnswerScreenState extends State<AnswerScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Answer!!!',
+                          widget.task.judul  ?? '',
                           style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.w700,
@@ -56,7 +63,17 @@ class _AnswerScreenState extends State<AnswerScreen> {
                           ),
                         ),
                         SizedBox(height: 20),
+                        Text(
+                          widget.task.deskripsi ?? '',
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w400,
+                            color: Colors.black,
+                          ),
+                        ),
+                        SizedBox(height: 20),
                         TextField(
+                          controller: widget.answerController,
                           keyboardType: TextInputType.multiline,
                           maxLines: null,
                           minLines: 1,
@@ -82,7 +99,9 @@ class _AnswerScreenState extends State<AnswerScreen> {
                         Appbutton(
                           label: 'send',
                           color: Appcolors.basicColor,
-                          onPressed: () {},
+                          onPressed: () {
+
+                          },
                           height: 45,
                           width: double.infinity,
                         ),

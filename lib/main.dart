@@ -28,7 +28,6 @@ class MyApp extends StatelessWidget {
         '/signin': (context) => const LoginScreen(),
         '/signup': (context) => const RegisterScreen(),
         '/taskscreen': (context) => const TaskScreen(),
-        '/answerscreen': (context) => const AnswerScreen(),
       },
     );
   }
