@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lapanganku/app/core/appColors.dart';
+import 'package:lapanganku/app/core/components/logoutDialog.dart';
 
 class ProfilScreen extends StatelessWidget {
   const ProfilScreen({super.key});
@@ -65,12 +66,15 @@ class ProfilScreen extends StatelessWidget {
                           ),
                         ),
                         SizedBox(width: 10),
-                        Text(
-                          'Edit profil',
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 17,
-                            fontWeight: FontWeight.w500,
+                        TextButton(
+                          onPressed: () {},
+                          child: Text(
+                            'Edit Profile',
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 17,
+                              fontWeight: FontWeight.w500,
+                            ),
                           ),
                         ),
                       ],
@@ -80,17 +84,31 @@ class ProfilScreen extends StatelessWidget {
                       children: [
                         IconButton(
                           onPressed: () {
-                            // showDialog(context: context, builder: builder)
+                            showDialog(
+                              context: context,
+                              builder:
+                                  (_) => LogoutDialog(
+                                    onConfirm: () {
+                                      Navigator.pushReplacementNamed(
+                                        context,
+                                        '/signin',
+                                      );
+                                    },
+                                  ),
+                            );
                           },
                           icon: Icon(Icons.logout_outlined, size: 35),
                         ),
                         SizedBox(width: 10),
-                        Text(
-                          'Logout',
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 17,
-                            fontWeight: FontWeight.w500,
+                        TextButton(
+                          onPressed: () {},
+                          child: Text(
+                            'Log out',
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 17,
+                              fontWeight: FontWeight.w500,
+                            ),
                           ),
                         ),
                       ],

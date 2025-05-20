@@ -23,7 +23,7 @@ class AuthService {
   }) async {
     try {
       final response = await _dio.post(
-        '/user/register',
+        '/register',
         data: {
           'name': name,
           'email': email,

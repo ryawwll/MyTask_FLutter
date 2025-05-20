@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lapanganku/app/core/appColors.dart';
 import 'package:lapanganku/app/core/components/appButton.dart';
-import 'package:lapanganku/app/cubit/cubit/answer_cubit.dart';
-import 'package:lapanganku/app/cubit/cubit/answer_state.dart';
+import 'package:lapanganku/app/cubit/answer_cubit/answer_cubit.dart';
+import 'package:lapanganku/app/cubit/answer_cubit/answer_state.dart';
 import 'package:lapanganku/app/presentation/answer_page.dart';
 import 'package:lapanganku/data/model/task_model/task_model.dart';
 
@@ -82,10 +82,7 @@ class _AnswerScreenState extends State<_Content> {
       child: Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
-          leading: IconButton(
-            onPressed: () {},
-            icon: Icon(Icons.arrow_back_outlined, color: Colors.white),
-          ),
+          automaticallyImplyLeading: false,
           title: Text('Answer Page', style: TextStyle(color: Colors.white)),
           flexibleSpace: Container(
             decoration: BoxDecoration(

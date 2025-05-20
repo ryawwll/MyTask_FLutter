@@ -2,9 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lapanganku/app/core/appColors.dart';
+import 'package:lapanganku/app/core/components/alert.dart';
 import 'package:lapanganku/app/cubit/Task_cubit/task_cubit.dart';
 import 'package:lapanganku/app/cubit/Task_cubit/task_state.dart';
-import 'package:lapanganku/app/cubit/cubit/answer_cubit.dart';
+import 'package:lapanganku/app/cubit/answer_cubit/answer_cubit.dart';
 import 'package:lapanganku/app/presentation/answer_screen.dart';
 
 class TaskScreen extends StatelessWidget {
@@ -128,16 +129,30 @@ class _ContentState extends State<_Content> {
                             ],
                           ),
                           onTap: () {
-                            final task = state.taskList[index];
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder:
-                                    (context) => BlocProvider(
-                                      create: (context) => AnswerCubit(),
-                                      child: AnswerScreen(task: task),
-                                    ),
-                              ),
+                            showDialog(
+                              context: context,
+                              builder:
+                                  (_) => Alert(
+                                    title: state.taskList[index].judul ?? '',
+                                    content:
+                                        'apakah anda yakin untuk mengerjakan tugas ini?',
+                                    leftButton: 'Cancel',
+                                    rightButton: 'Ok',
+                                    onPressed: () {
+                                      final task = state.taskList[index];
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder:
+                                              (context) => BlocProvider(
+                                                create:
+                                                    (context) => AnswerCubit(),
+                                                child: AnswerScreen(task: task),
+                                              ),
+                                        ),
+                                      );
+                                    },
+                                  ),
                             );
                           },
                         ),

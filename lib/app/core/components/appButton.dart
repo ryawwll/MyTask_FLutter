@@ -20,15 +20,27 @@ class AppButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 50,
+      height: height,
+      width: width,
+
       child: ElevatedButton(
         onPressed: onPressed,
         style: ButtonStyle(
+          shape: MaterialStatePropertyAll(
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+          ),
           backgroundColor: WidgetStatePropertyAll(
             buttonColor ?? Appcolors.basicColor,
           ),
         ),
-        child: Text(label, style: TextStyle(color: Colors.white, fontSize: 18)),
+        child: Text(
+          label,
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
       ),
     );
   }

@@ -1,5 +1,5 @@
 import 'package:bloc/bloc.dart';
-import 'package:lapanganku/app/cubit/cubit/answer_state.dart';
+import 'package:lapanganku/app/cubit/answer_cubit/answer_state.dart';
 import 'package:lapanganku/data/datasource/service/answer_service.dart';
 import 'package:lapanganku/data/model/answer_respon_model/answer_respon_model.dart';
 

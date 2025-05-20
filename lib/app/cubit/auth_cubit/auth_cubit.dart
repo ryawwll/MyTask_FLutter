@@ -50,7 +50,9 @@ class AuthCubit extends Cubit<AuthState> {
 
     var data = await AuthService().logout(token);
 
-    data.fold((left) => emit(state.copyWith(errorMessage: left)), (right) async {
+    data.fold((left) => emit(state.copyWith(errorMessage: left)), (
+      right,
+    ) async {
       LocalStrorage().deleteToken();
       emit(state.copyWith(logoutResponModel: right));
     });
