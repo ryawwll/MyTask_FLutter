@@ -16,7 +16,7 @@ class LocalStrorage {
   }
 
   /// Check if user data exists in local storage
-  void deleteToken() {
+  deleteToken() {
     _userBox.delete('token');
   }
 }

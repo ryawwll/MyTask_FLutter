@@ -15,12 +15,6 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   int _currentIndex = 0;
 
-  final List screen = [
-    const TaskScreen(),
-    const AnswerPage(),
-    const ProfilScreen(),
-  ];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,17 +22,14 @@ class _MainScreenState extends State<MainScreen> {
       bottomNavigationBar: BottomNavigationBar(
         unselectedItemColor: Color(0xFF9E9E9E),
         selectedItemColor: Appcolors.basicColor,
-        currentIndex: _currentIndex,  
+        currentIndex: _currentIndex,
         onTap: (index) {
           setState(() {
             _currentIndex = index;
           });
         },
         items: [
-          BottomNavigationBarItem(
-            icon: const Icon(Icons.task),
-            label: 'Task',
-          ),
+          BottomNavigationBarItem(icon: const Icon(Icons.task), label: 'Task'),
           BottomNavigationBarItem(
             icon: const Icon(Icons.assignment),
             label: 'Answer',
@@ -51,4 +42,6 @@ class _MainScreenState extends State<MainScreen> {
       ),
     );
   }
+
+  final List screen = [TaskScreen(), AnswerPage(), ProfilScreen()];
 }

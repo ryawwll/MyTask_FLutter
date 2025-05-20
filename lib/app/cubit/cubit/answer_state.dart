@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:lapanganku/data/model/answer_respon_model.dart';
+import 'package:lapanganku/data/model/answer_respon_model/answer_respon_model.dart';
 
 class AnswerState extends Equatable {
   const AnswerState({
@@ -26,4 +26,3 @@ class AnswerState extends Equatable {
     );
   }
 }
-

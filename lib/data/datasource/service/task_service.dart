@@ -18,9 +18,7 @@ class TaskService {
       var response = await dio.get('/tugas');
 
       var data =
-          (response.data as List)
-              .map((e) => TaskModel.fromMap(e))
-              .toList();
+          (response.data as List).map((e) => TaskModel.fromMap(e)).toList();
       return Right(data);
     } catch (e) {
       return Left(e.toString());

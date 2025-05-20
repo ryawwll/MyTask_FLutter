@@ -1,13 +1,14 @@
 import 'package:dio/dio.dart';
 import 'package:either_dart/either.dart';
 import 'package:lapanganku/data/model/login_respon_model/login_respon_model.dart';
+import 'package:lapanganku/data/model/logout_respon_model.dart';
 import 'package:lapanganku/data/model/register_respon_model/register_respon_model.dart';
 
 class AuthService {
   final Dio _dio = Dio();
 
   AuthService() {
-    _dio.options.baseUrl = 'https://mytask.ukasyaaah.my.id/api';
+    _dio.options.baseUrl = 'https://mytask.ukasyaaah.my.id/api/user';
     _dio.options.headers = {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
@@ -50,16 +51,13 @@ class AuthService {
   }) async {
     try {
       final response = await _dio.post(
-       'https://mytask.ukasyaaah.my.id/api/user/login',
+        '/login',
         data: {"email": email, "password": password},
       );
-      print(response.data);
 
       final loginResponse = LoginResponModel.fromMap(response.data);
       return Right(loginResponse);
     } on DioException catch (e) {
-      print(e.response?.data.toString());
-      print(e.message.toString());
       if (e.response != null) {
         return Left(e.response?.data['message'] ?? 'Login failed');
       } else {
@@ -67,6 +65,28 @@ class AuthService {
       }
     } catch (e) {
       return Left('An unexpected error occurred');
+    }
+  }
+
+  Future<Either<String, LogoutResponModel>> logout(String token) async {
+    try {
+      var response = await _dio.post(
+        '/logout',
+        options: Options(headers: {'Authorization': 'Bearer $token}'}),
+      );
+
+      var logoutResponse = LogoutResponModel.fromMap(response.data);
+      return Right(logoutResponse);
+    } on DioException catch (e) {
+      if (e.response?.statusCode == 404) {
+        var errorResponse = e.response?.data['message'];
+        return Left('Error : $errorResponse');
+      } else if (e.response?.statusCode == 401) {
+        var errorResponse = e.response?.data['message'];
+        return Left('Error : $errorResponse');
+      } else {
+        return Left('Undhandle Error : ${e.message}');
+      }
     }
   }
 }

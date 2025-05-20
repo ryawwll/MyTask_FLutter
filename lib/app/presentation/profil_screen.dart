@@ -8,14 +8,9 @@ class ProfilScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        actions: [
-          
-        ],
-      ),
-      
+
+      appBar: AppBar(backgroundColor: Colors.transparent, actions: []),
+
       body: Center(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -66,10 +61,10 @@ class ProfilScreen extends StatelessWidget {
                           height: 45,
                           child: IconButton(
                             onPressed: () {},
-                            icon: Icon(Icons.edit, size: 35,),
+                            icon: Icon(Icons.edit, size: 35),
                           ),
                         ),
-                        SizedBox(width: 10,),
+                        SizedBox(width: 10),
                         Text(
                           'Edit profil',
                           style: TextStyle(
@@ -84,16 +79,20 @@ class ProfilScreen extends StatelessWidget {
                     Row(
                       children: [
                         IconButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            // showDialog(context: context, builder: builder)
+                          },
                           icon: Icon(Icons.logout_outlined, size: 35),
                         ),
                         SizedBox(width: 10),
-                        Text('Logout', 
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 17,
-                              fontWeight: FontWeight.w500
-                            ),),
+                        Text(
+                          'Logout',
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 17,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
                       ],
                     ),
                   ],
@@ -102,18 +101,6 @@ class ProfilScreen extends StatelessWidget {
             ),
           ],
         ),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        selectedItemColor: Appcolors.basicColor,
-        unselectedItemColor: Colors.grey,
-        items: [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.assignment),
-            label: 'Answer',
-          ),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
-        ],
       ),
     );
   }

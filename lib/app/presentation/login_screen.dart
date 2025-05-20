@@ -67,7 +67,7 @@ class _ContentState extends State<_Content> {
               backgroundColor: Colors.green,
             ),
           );
-          Navigator.pushReplacementNamed(context, '/taskscreen');
+          Navigator.pushReplacementNamed(context, '/main');
         }
 
         if (state.errorMessage != '') {

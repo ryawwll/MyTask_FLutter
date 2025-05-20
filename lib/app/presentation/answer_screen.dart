@@ -172,7 +172,7 @@ class _AnswerScreenState extends State<_Content> {
                                 );
                                 return;
                               }
-                               await context.read<AnswerCubit>().submitAnswer(
+                              await context.read<AnswerCubit>().submitAnswer(
                                 tugas: widget.task.toString(),
                                 jawaban: widget.answerController.text,
                               );

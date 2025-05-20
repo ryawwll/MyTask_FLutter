@@ -13,11 +13,7 @@ class TaskState extends Equatable {
   final String error;
 
   @override
-  List<Object> get props => [
-    taskList,
-    isLoading,
-    error,
-  ];
+  List<Object> get props => [taskList, isLoading, error];
 
   TaskState copyWith({
     List<TaskModel>? taskList,

@@ -135,9 +135,7 @@ class _ContentState extends State<_Content> {
                                 builder:
                                     (context) => BlocProvider(
                                       create: (context) => AnswerCubit(),
-                                      child: AnswerScreen(
-                                        task: task,
-                                      ),
+                                      child: AnswerScreen(task: task),
                                     ),
                               ),
                             );

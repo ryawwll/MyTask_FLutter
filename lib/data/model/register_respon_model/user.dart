@@ -3,66 +3,61 @@ import 'dart:convert';
 import 'package:equatable/equatable.dart';
 
 class User extends Equatable {
-	final String? name;
-	final String? email;
-	final String? updatedAt;
-	final String? createdAt;
-	final int? id;
+  final String? name;
+  final String? email;
+  final String? updatedAt;
+  final String? createdAt;
+  final int? id;
 
-	const User({
-		this.name, 
-		this.email, 
-		this.updatedAt, 
-		this.createdAt, 
-		this.id, 
-	});
+  const User({this.name, this.email, this.updatedAt, this.createdAt, this.id});
 
-	factory User.fromMap(Map<String, dynamic> data) => User(
-				name: data['name'] as String?,
-				email: data['email'] as String?,
-				updatedAt: data['updated_at'] as String?,
-				createdAt: data['created_at'] as String?,
-				id: data['id'] as int?,
-			);
+  factory User.fromMap(Map<String, dynamic> data) => User(
+    name: data['name'] as String?,
+    email: data['email'] as String?,
+    updatedAt: data['updated_at'] as String?,
+    createdAt: data['created_at'] as String?,
+    id: data['id'] as int?,
+  );
 
-	Map<String, dynamic> toMap() => {
-				'name': name,
-				'email': email,
-				'updated_at': updatedAt,
-				'created_at': createdAt,
-				'id': id,
-			};
+  Map<String, dynamic> toMap() => {
+    'name': name,
+    'email': email,
+    'updated_at': updatedAt,
+    'created_at': createdAt,
+    'id': id,
+  };
 
   /// `dart:convert`
   ///
   /// Parses the string and returns the resulting Json object as [User].
-	factory User.fromJson(String data) {
-		return User.fromMap(json.decode(data) as Map<String, dynamic>);
-	}
+  factory User.fromJson(String data) {
+    return User.fromMap(json.decode(data) as Map<String, dynamic>);
+  }
+
   /// `dart:convert`
   ///
   /// Converts [User] to a JSON string.
-	String toJson() => json.encode(toMap());
+  String toJson() => json.encode(toMap());
 
-	User copyWith({
-		String? name,
-		String? email,
-		String? updatedAt,
-		String? createdAt,
-		int? id,
-	}) {
-		return User(
-			name: name ?? this.name,
-			email: email ?? this.email,
-			updatedAt: updatedAt ?? this.updatedAt,
-			createdAt: createdAt ?? this.createdAt,
-			id: id ?? this.id,
-		);
-	}
+  User copyWith({
+    String? name,
+    String? email,
+    String? updatedAt,
+    String? createdAt,
+    int? id,
+  }) {
+    return User(
+      name: name ?? this.name,
+      email: email ?? this.email,
+      updatedAt: updatedAt ?? this.updatedAt,
+      createdAt: createdAt ?? this.createdAt,
+      id: id ?? this.id,
+    );
+  }
 
-	@override
-	bool get stringify => true;
+  @override
+  bool get stringify => true;
 
-	@override
-	List<Object?> get props => [name, email, updatedAt, createdAt, id];
+  @override
+  List<Object?> get props => [name, email, updatedAt, createdAt, id];
 }
