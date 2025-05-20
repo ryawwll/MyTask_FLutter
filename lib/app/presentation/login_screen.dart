@@ -202,9 +202,9 @@ class _ContentState extends State<_Content> {
                               ),
                             ),
                             SizedBox(height: 50),
-                            Appbutton(
+                            AppButton(
                               label: 'Login',
-                              color: Appcolors.basicColor,
+                              buttonColor: Appcolors.basicColor,
                               onPressed: () async {
                                 await context.read<AuthCubit>().doLogin(
                                   email: emailController.text,

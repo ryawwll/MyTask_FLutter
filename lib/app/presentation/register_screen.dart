@@ -263,9 +263,9 @@ class __ContentState extends State<_Content> {
                               ),
                             ),
                             SizedBox(height: 50),
-                            Appbutton(
+                            AppButton(
                               label: 'Register',
-                              color: Appcolors.basicColor,
+                              buttonColor: Appcolors.basicColor,
                               onPressed: () {
                                 context.read<AuthCubit>().doRegister(
                                   name: nameControlller.text,

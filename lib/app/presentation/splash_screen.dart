@@ -33,9 +33,9 @@ class SplashScreen extends StatelessWidget {
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 40),
-                child: Appbutton(
+                child: AppButton(
                   label: 'Get Start',
-                  color: Appcolors.basic2Color,
+                  buttonColor: Appcolors.basic2Color,
                   onPressed: () {
                     Navigator.of(context).pushReplacement(
                       MaterialPageRoute(builder: (context) => LoginScreen()),

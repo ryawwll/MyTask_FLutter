@@ -60,9 +60,9 @@ class FinishScreen extends StatelessWidget {
                       ),
                     ),
                     SizedBox(height: 17),
-                    Appbutton(
+                    AppButton(
                       label: 'Back to home',
-                      color: Appcolors.basicColor,
+                      buttonColor: Appcolors.basicColor,
                       onPressed: () {},
                       height: 45,
                       width: double.infinity,

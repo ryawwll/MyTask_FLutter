@@ -212,9 +212,9 @@ class _EditprofilScreenState extends State<EditprofilScreen> {
                             ),
                           ),
                           SizedBox(height: 50),
-                          Appbutton(
+                          AppButton(
                             label: 'Login',
-                            color: Appcolors.basicColor,
+                            buttonColor: Appcolors.basicColor,
                             onPressed: () {},
                             height: 45,
                             width: double.infinity,

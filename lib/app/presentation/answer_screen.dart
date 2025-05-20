@@ -156,9 +156,9 @@ class _AnswerScreenState extends State<_Content> {
                             ),
                           ),
                           SizedBox(height: 20),
-                          Appbutton(
+                          AppButton(
                             label: 'send',
-                            color: Appcolors.basicColor,
+                            buttonColor: Appcolors.basicColor,
                             onPressed: () async {
                               if (widget.answerController.text.isEmpty) {
                                 ScaffoldMessenger.of(context).showSnackBar(

@@ -1,43 +1,34 @@
 import 'package:flutter/material.dart';
+import 'package:lapanganku/app/core/appColors.dart';
 
-class Appbutton extends StatelessWidget {
-  Appbutton({
+class AppButton extends StatelessWidget {
+  const AppButton({
     super.key,
     required this.label,
-    required this.color,
-    this.onPressed,
-    required this.height,
-    required this.width,
+    required this.onPressed,
+    this.height,
+    this.width,
+    this.buttonColor,
   });
 
   final String label;
-  final color;
-  void Function()? onPressed;
-  double height = 0.0;
-  double width = 0.0;
+  final Color? buttonColor;
+  final double? height;
+  final double? width;
+  final void Function()? onPressed;
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: height,
-      width: width,
+      height: 50,
       child: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          backgroundColor: color,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10.0),
-          ),
-        ),
-
         onPressed: onPressed,
-        child: Text(
-          label,
-          style: TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.w700,
-            color: Colors.white,
+        style: ButtonStyle(
+          backgroundColor: WidgetStatePropertyAll(
+            buttonColor ?? Appcolors.basicColor,
           ),
         ),
+        child: Text(label, style: TextStyle(color: Colors.white, fontSize: 18)),
       ),
     );
   }
