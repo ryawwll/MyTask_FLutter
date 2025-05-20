@@ -8,12 +8,14 @@ class ProfilScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
+      
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         actions: [
           
         ],
       ),
+      
       body: Center(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

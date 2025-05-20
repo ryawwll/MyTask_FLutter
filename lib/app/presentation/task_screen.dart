@@ -4,8 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lapanganku/app/core/appColors.dart';
 import 'package:lapanganku/app/cubit/Task_cubit/task_cubit.dart';
 import 'package:lapanganku/app/cubit/Task_cubit/task_state.dart';
+import 'package:lapanganku/app/cubit/cubit/answer_cubit.dart';
 import 'package:lapanganku/app/presentation/answer_screen.dart';
-import 'package:lapanganku/data/model/task_model/task_model.dart';
 
 class TaskScreen extends StatelessWidget {
   const TaskScreen({super.key});
@@ -21,7 +21,6 @@ class TaskScreen extends StatelessWidget {
 
 class _Content extends StatefulWidget {
   const _Content();
-
 
   @override
   State<_Content> createState() => _ContentState();
@@ -134,8 +133,11 @@ class _ContentState extends State<_Content> {
                               context,
                               MaterialPageRoute(
                                 builder:
-                                    (context) => AnswerScreen(
-                                      task : task,
+                                    (context) => BlocProvider(
+                                      create: (context) => AnswerCubit(),
+                                      child: AnswerScreen(
+                                        task: task,
+                                      ),
                                     ),
                               ),
                             );
