@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:lapanganku/app/cubit/profile_cubit/profile_state.dart';
-import 'package:lapanganku/data/datasource/editProfil_service.dart';
+import 'package:lapanganku/data/datasource/service/editProfil_service.dart';
 import 'package:lapanganku/data/model/edit_profile_respon_model/edit_profile_respon_model.dart';
 
 class ProfileCubit extends Cubit<ProfileState> {
@@ -45,4 +45,31 @@ class ProfileCubit extends Cubit<ProfileState> {
       ),
     );
   }
+
+  Future<void> getProfile(
+    String name,
+  ) async {
+    emit(state.copyWith(isLoading: true));
+
+    var result = await EditprofilService().getProfile(
+      name: name,
+    );
+
+    result.fold(
+      (left) {
+        emit(state.copyWith(
+          errorMessage: left,
+          isLoading: false,
+        ));
+      },
+      (right) {
+        emit(state.copyWith(
+          editProfileResponModel: right,
+          isLoading: false,
+        ));
+      },
+    );
+  }
+
+  
 }

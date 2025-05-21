@@ -51,7 +51,7 @@ class _ContentState extends State<_Content> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Hello! Fulan',
+                      'Hello!',
                       style: TextStyle(
                         fontSize: 22,
                         color: Colors.white,

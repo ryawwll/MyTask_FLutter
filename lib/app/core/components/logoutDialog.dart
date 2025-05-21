@@ -5,10 +5,21 @@ import 'package:lapanganku/app/cubit/auth_cubit/auth_cubit.dart';
 import 'package:lapanganku/app/cubit/auth_cubit/auth_state.dart';
 import 'package:lapanganku/data/datasource/service/local_storage/local_strorage.dart';
 
-class LogoutDialog extends StatelessWidget {
+class Logoutdialog extends StatelessWidget {
+  const Logoutdialog({super.key, required this.onConfirm});
+
   final VoidCallback onConfirm;
 
-  const LogoutDialog({super.key, required this.onConfirm});
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider(create: (context) => AuthCubit(), child: _Content( onConfirm: onConfirm));
+  }
+}
+
+class _Content extends StatelessWidget {
+  const _Content({required this.onConfirm});
+
+  final VoidCallback onConfirm;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +37,7 @@ class LogoutDialog extends StatelessWidget {
       },
       builder: (context, state) {
         return AlertDialog(
-          backgroundColor: const Color(0xFFFDF6F4),
+          backgroundColor: Colors.white,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20),
           ),
@@ -44,7 +55,7 @@ class LogoutDialog extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
-                  color: Colors.white,
+                  color: Colors.black,
                 ),
               ),
               const SizedBox(height: 8),
@@ -92,8 +103,7 @@ class LogoutDialog extends StatelessWidget {
                               : () async {
                                 final token = LocalStrorage().getToken();
                                 if (token != null && token.isNotEmpty) {
-                                  final logoutCubit =
-                                      context.read<AuthCubit>();
+                                  final logoutCubit = context.read<AuthCubit>();
                                   await logoutCubit.doLogout(token);
                                   LocalStrorage().deleteToken();
 

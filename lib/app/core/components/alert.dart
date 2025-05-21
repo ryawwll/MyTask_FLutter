@@ -4,8 +4,8 @@ class Alert extends StatelessWidget {
   final String title;
   final String content;
   final VoidCallback onPressed;
-   String leftButton;
-  final String rightButton;
+  String leftButton;
+  String rightButton;
 
   Alert({
     super.key,

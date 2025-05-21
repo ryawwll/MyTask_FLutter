@@ -1,15 +1,31 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lapanganku/app/core/appColors.dart';
+import 'package:lapanganku/app/cubit/cubit/get_jawaban_cubit.dart';
+import 'package:lapanganku/app/cubit/cubit/get_jawaban_state.dart';
 
-class AnswerPage extends StatefulWidget {
+class AnswerPage extends StatelessWidget {
   const AnswerPage({super.key});
 
   @override
-  State<AnswerPage> createState() => _AnswerPageState();
+  Widget build(BuildContext context) {
+    return BlocBuilder<GetJawabanCubit, GetJawabanState>(
+      builder: (context, state) {
+        return _Content();
+      },
+    );
+  }
 }
 
-class _AnswerPageState extends State<AnswerPage> {
+class _Content extends StatefulWidget {
+  const _Content();
+
+  @override
+  State<_Content> createState() => _ContentState();
+}
+
+class _ContentState extends State<_Content> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,73 +71,38 @@ class _AnswerPageState extends State<AnswerPage> {
           SizedBox(height: 20),
 
           // CARD TUGAS
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: Card(
-              elevation: 6,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(15),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Tugas Matematika',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18,
-                      ),
-                    ),
-                    SizedBox(height: 8),
-                    Text(
-                      'Tugas ini membahas konsep pembagian bilangan bulat positif dan negatif. '
-                      'Siswa diminta untuk menyelesaikan soal-soal pembagian dengan hasil bilangan bulat, '
-                      'serta memahami aturan tanda pada operasi pembagian. '
-                      'Kerjakan soal dengan teliti dan sertakan cara pengerjaan.',
-                    ),
-                    SizedBox(height: 10),
-                    Container(
-                      width: 112,
-                      height: 30,
-                      decoration: BoxDecoration(
-                        color: Appcolors.basicColor,
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: Center(
-                        child: Text(
-                          'Wawan S.Pd.I',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 11,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                      ),
-                    ),
-                    Divider(),
-                    Row(
-                      children: [
-                        Icon(Icons.access_time),
-                        SizedBox(width: 8),
-                        Text('12 Jam'),
-                        Spacer(),
-                        IconButton(
-                          onPressed: () {},
-                          icon: Icon(Icons.edit_note_outlined),
-                        ),
-                        IconButton(
-                          onPressed: () {},
-                          icon: Icon(Icons.delete_outline),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
+          // BlocBuilder<GetJawabanCubit, GetJawabanState>(builder: (context, state) {
+          //   if (state.isLoading) {
+          //     return Center(child: CircularProgressIndicator());
+          //   } else if (state.errorMessage != '') {
+          //     return Center(child: Text(state.errorMessage));
+          //   } else if (state.getJawabanResponModel == null) {
+          //     return Center(child: Text('No data available'));
+          //   } else {
+          //     // Display the data from state.getJawabanResponModel
+          //     return Padding(
+          //       padding: const EdgeInsets.all(16.0),
+          //       child: RefreshIndicator(
+          //         onRefresh: () async {
+          //           // Call the getJawaban method to refresh data
+          //           await context.read<GetJawabanCubit>().getJawaban(tugasId: '1');
+          //         },
+          //         child: ListView.builder(
+          //           itemCount: state.getJawabanResponModel!.data.length,
+          //           itemBuilder: (context, index) {
+          //             final jawaban = state.getJawabanResponModel!.data[index];
+          //             return Card(
+          //               child: ListTile(
+          //                 title: Text(jawaban.title),
+          //                 subtitle: Text(jawaban.description),
+          //               ),
+          //             );
+          //           },
+          //         ),
+          //       ),
+          //     );
+          //   }
+          // })
         ],
       ),
     );

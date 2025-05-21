@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:lapanganku/app/presentation/answer_page.dart';
+import 'package:lapanganku/app/presentation/editProfil_screen.dart';
 import 'package:lapanganku/app/presentation/login_screen.dart';
 import 'package:lapanganku/app/presentation/main_screen.dart';
 import 'package:lapanganku/app/presentation/register_screen.dart';
@@ -30,6 +31,7 @@ class MyApp extends StatelessWidget {
         '/main': (context) => const MainScreen(),
         '/taskscreen': (context) => const TaskScreen(),
         '/answerscreen': (context) => const AnswerPage(),
+        '/editprofile': (context) => const EditprofilScreen(),
       },
     );
   }

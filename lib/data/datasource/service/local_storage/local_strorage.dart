@@ -4,6 +4,10 @@ class LocalStrorage {
   Box _userBox = Hive.box('user');
 
   /// Initialize Hive and open the user box
+  
+  getName() {
+    _userBox = Hive.box('user');
+  }
 
   /// Save user data to local storage
   void saveToken(String token) {

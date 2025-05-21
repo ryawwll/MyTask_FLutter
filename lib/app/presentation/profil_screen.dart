@@ -1,17 +1,38 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lapanganku/app/core/appColors.dart';
 import 'package:lapanganku/app/core/components/logoutDialog.dart';
+import 'package:lapanganku/app/cubit/profile_cubit/profile_cubit.dart';
+import 'package:lapanganku/app/cubit/profile_cubit/profile_state.dart';
+import 'package:lapanganku/data/model/edit_profile_respon_model/edit_profile_respon_model.dart';
 
 class ProfilScreen extends StatelessWidget {
   const ProfilScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    return BlocBuilder<ProfileCubit, ProfileState>(
+      builder: (context, state) {
+        return _Content();
+      },
+    );
+  }
+}
+
+class _Content extends StatefulWidget {
+  const _Content();
+
+  @override
+  State<_Content> createState() => _ContentState();
+}
+
+class _ContentState extends State<_Content> {
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-
-      appBar: AppBar(backgroundColor: Colors.transparent, actions: []),
-
       body: Center(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -61,7 +82,12 @@ class ProfilScreen extends StatelessWidget {
                           width: 45,
                           height: 45,
                           child: IconButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.pushReplacementNamed(
+                                context,
+                                '/editprofile',
+                              );
+                            },
                             icon: Icon(Icons.edit, size: 35),
                           ),
                         ),
@@ -87,7 +113,7 @@ class ProfilScreen extends StatelessWidget {
                             showDialog(
                               context: context,
                               builder:
-                                  (_) => LogoutDialog(
+                                  (_) => Logoutdialog(
                                     onConfirm: () {
                                       Navigator.pushReplacementNamed(
                                         context,
@@ -101,7 +127,20 @@ class ProfilScreen extends StatelessWidget {
                         ),
                         SizedBox(width: 10),
                         TextButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            showDialog(
+                              context: context,
+                              builder:
+                                  (_) => Logoutdialog(
+                                    onConfirm: () {
+                                      Navigator.pushReplacementNamed(
+                                        context,
+                                        '/signin',
+                                      );
+                                    },
+                                  ),
+                            );
+                          },
                           child: Text(
                             'Log out',
                             style: TextStyle(

@@ -274,11 +274,6 @@ class __ContentState extends State<_Content> {
                                   password_confirmation:
                                       confirmPasswordController.text,
                                 );
-                                // Navigator.of(context).pushReplacement(
-                                //   MaterialPageRoute(
-                                //     builder: (context) => TaskScreen(),
-                                //   ),
-                                // );
                               },
                               height: 45,
                               width: double.infinity,

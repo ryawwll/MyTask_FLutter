@@ -1,31 +1,28 @@
 import 'package:dio/dio.dart';
 import 'package:either_dart/either.dart';
 import 'package:lapanganku/data/datasource/service/local_storage/local_strorage.dart';
+import 'package:lapanganku/data/model/get_jawaban_respon_model/get_jawaban_respon_model.dart';
 
-class EditprofilService {
+class GetJawbanService {
   final dio = Dio(
     BaseOptions(
       baseUrl: 'https://mytask.ukasyaaah.my.id/api/user',
-      connectTimeout: Duration(seconds: 5),
-      receiveTimeout: Duration(seconds: 5),
+      connectTimeout: const Duration(seconds: 5),
+      receiveTimeout: const Duration(seconds: 5),
       headers: {'Authorization': 'Bearer ${LocalStrorage().getToken()}'},
     ),
   );
 
-  Future<Either<String, String>> editProfile({
-    required String name,
-    required String email,
-    required String password,
-    required String passwordConfirmation,
+  Future<Either<String, GetJawabanResponModel>> getJawaban({
+    required String tugasId,
+    required String jawaban,
   }) async {
     try {
       var response = await dio.post(
-        '/edit-profile',
+        '/jawaban',
         data: {
-          'name': name,
-          'email': email,
-          'password': password,
-          'password_confirmation': passwordConfirmation,
+          'tugas_id': tugasId,
+          'isi_jawaban': jawaban,
         },
       );
 
