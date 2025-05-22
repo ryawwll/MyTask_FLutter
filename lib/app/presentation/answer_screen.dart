@@ -4,6 +4,8 @@ import 'package:lapanganku/app/core/appColors.dart';
 import 'package:lapanganku/app/core/components/appButton.dart';
 import 'package:lapanganku/app/cubit/answer_cubit/answer_cubit.dart';
 import 'package:lapanganku/app/cubit/answer_cubit/answer_state.dart';
+import 'package:lapanganku/app/cubit/get_jawaban_cubit/get_jawaban_cubit.dart';
+import 'package:lapanganku/app/cubit/get_jawaban_cubit/get_jawaban_state.dart';
 import 'package:lapanganku/app/presentation/answer_page.dart';
 import 'package:lapanganku/data/model/task_model/task_model.dart';
 
@@ -48,10 +50,11 @@ class _AnswerScreenState extends State<_Content> {
     return BlocListener<AnswerCubit, AnswerState>(
       listenWhen:
           (previous, current) =>
-              previous.answerResponModel != current.answerResponModel ||
-              previous.errorMessage != current.errorMessage,
+              current.isSuccess != previous.isSuccess ||
+              current.errorMessage != previous.errorMessage,
       listener: (context, state) {
-        if (state.answerResponModel != '') {
+        print(state.isSuccess);
+        if (state.isSuccess == true) {
           // Handle successful response
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
@@ -62,22 +65,26 @@ class _AnswerScreenState extends State<_Content> {
               backgroundColor: Colors.green,
             ),
           );
-        } else if (state.errorMessage != '') {
-          // Handle error response
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text(
-                state.errorMessage,
-                style: TextStyle(color: Colors.white),
-              ),
-              backgroundColor: Colors.red,
-            ),
-          );
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(builder: (context) => AnswerPage()),
-          );
+
+          // Navigator.pushReplacementNamed(context, '/main');
         }
+
+        // if (state.errorMessage != '') {
+        //   // Handle error response
+        //   ScaffoldMessenger.of(context).showSnackBar(
+        //     SnackBar(
+        //       content: Text(
+        //         state.errorMessage,
+        //         style: TextStyle(color: Colors.white),
+        //       ),
+        //       backgroundColor: Colors.red,
+        //     ),
+        //   );
+        //   // Navigator.pushReplacement(
+        //   //   context,
+        //   //   MaterialPageRoute(builder: (context) => AnswerPage()),
+        //   // );
+        // }
       },
       child: Scaffold(
         backgroundColor: Colors.white,
@@ -153,29 +160,47 @@ class _AnswerScreenState extends State<_Content> {
                             ),
                           ),
                           SizedBox(height: 20),
-                          AppButton(
-                            label: 'send',
-                            buttonColor: Appcolors.basicColor,
-                            onPressed: () async {
-                              if (widget.answerController.text.isEmpty) {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                    content: Text(
-                                      'your answer is empty',
-                                      style: TextStyle(color: Colors.white),
-                                    ),
-                                    backgroundColor: Colors.red,
+                          BlocBuilder<AnswerCubit, AnswerState>(
+                            builder: (context, state) {
+                              if (state.isLoading) {
+                                return Center(
+                                  child: CircularProgressIndicator(
+                                    color: Appcolors.basicColor,
                                   ),
                                 );
-                                return;
                               }
-                              await context.read<AnswerCubit>().submitAnswer(
-                                tugas: widget.task.toString(),
-                                jawaban: widget.answerController.text,
+                              return AppButton(
+                                label: 'send',
+                                buttonColor: Appcolors.basicColor,
+                                onPressed: () async {
+                                  if (widget.answerController.text.isEmpty) {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text(
+                                          'your answer is empty',
+                                          style: TextStyle(color: Colors.white),
+                                        ),
+                                        backgroundColor: Colors.red,
+                                      ),
+                                    );
+                                    return;
+                                  }
+                                  await context
+                                      .read<AnswerCubit>()
+                                      .submitAnswer(
+                                        tugas: widget.task.id.toString(),
+                                        jawaban: widget.answerController.text,
+                                      );
+
+                                  Navigator.pushReplacementNamed(
+                                    context,
+                                    '/main',
+                                  );
+                                },
+                                height: 45,
+                                width: double.infinity,
                               );
                             },
-                            height: 45,
-                            width: double.infinity,
                           ),
                         ],
                       ),

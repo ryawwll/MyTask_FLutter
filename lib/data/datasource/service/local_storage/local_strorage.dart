@@ -4,7 +4,7 @@ class LocalStrorage {
   Box _userBox = Hive.box('user');
 
   /// Initialize Hive and open the user box
-  
+
   getName() {
     _userBox = Hive.box('user');
   }

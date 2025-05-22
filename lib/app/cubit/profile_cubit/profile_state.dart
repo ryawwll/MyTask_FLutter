@@ -20,7 +20,8 @@ class ProfileState extends Equatable {
     bool? isLoading,
   }) {
     return ProfileState(
-      editProfileResponModel: editProfileResponModel ?? this.editProfileResponModel,
+      editProfileResponModel:
+          editProfileResponModel ?? this.editProfileResponModel,
       errorMessage: errorMessage ?? this.errorMessage,
       isLoading: isLoading ?? this.isLoading,
     );

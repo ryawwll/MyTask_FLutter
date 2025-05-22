@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
 import 'package:either_dart/either.dart';
 import 'package:lapanganku/data/datasource/service/local_storage/local_strorage.dart';
@@ -13,21 +15,17 @@ class GetJawbanService {
     ),
   );
 
-  Future<Either<String, GetJawabanResponModel>> getJawaban({
-    required String tugasId,
-    required String jawaban,
-  }) async {
+  Future<Either<String, List<GetJawabanResponModel>>> getJawaban() async {
     try {
-      var response = await dio.post(
-        '/jawaban',
-        data: {
-          'tugas_id': tugasId,
-          'isi_jawaban': jawaban,
-        },
-      );
+      var response = await dio.get('/jawaban');
+      var result =
+          (response.data as List)
+              .map((item) => GetJawabanResponModel.fromMap(item))
+              .toList();
+      log(result.toString());
 
-      return Right(response.data['message']);
-    } catch (e) {
+      return Right(result);
+    } on DioException catch (e) {
       return Left(e.toString());
     }
   }

@@ -62,4 +62,17 @@ class AuthCubit extends Cubit<AuthState> {
   void resetState() {
     emit(const AuthState());
   }
+
+  Future<void> getUser() async {
+    emit(state.copyWith(isLoading: true));
+
+    var result = await AuthService().getUser();
+
+    result.fold(
+      (left) => emit(state.copyWith(errorMessage: left, isLoading: false)),
+      (right) {
+        emit(state.copyWith(userResponModel: right, isLoading: false));
+      },
+    );
+  }
 }

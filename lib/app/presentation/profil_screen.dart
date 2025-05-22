@@ -1,23 +1,16 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lapanganku/app/core/appColors.dart';
 import 'package:lapanganku/app/core/components/logoutDialog.dart';
-import 'package:lapanganku/app/cubit/profile_cubit/profile_cubit.dart';
-import 'package:lapanganku/app/cubit/profile_cubit/profile_state.dart';
-import 'package:lapanganku/data/model/edit_profile_respon_model/edit_profile_respon_model.dart';
+import 'package:lapanganku/app/cubit/auth_cubit/auth_cubit.dart';
+import 'package:lapanganku/app/cubit/auth_cubit/auth_state.dart';
 
 class ProfilScreen extends StatelessWidget {
   const ProfilScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ProfileCubit, ProfileState>(
-      builder: (context, state) {
-        return _Content();
-      },
-    );
+    return BlocProvider(create: (context) => AuthCubit()..getUser(), child: _Content());
   }
 }
 
@@ -47,27 +40,31 @@ class _ContentState extends State<_Content> {
                   end: Alignment.bottomCenter,
                 ),
               ),
-              child: Center(
-                child: Column(
-                  children: [
-                    Text(
-                      'Fulan',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 40,
-                        fontWeight: FontWeight.w400,
-                      ),
+              child: BlocBuilder<AuthCubit, AuthState>(
+                builder: (context, state) {
+                  return Center(
+                    child: Column(
+                      children: [
+                        Text(
+                          state.userResponModel.user?.name ?? '',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 40,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                        Text(
+                          state.userResponModel.user?.email ?? '',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                      ],
                     ),
-                    Text(
-                      'Fulan@example.com',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w400,
-                      ),
-                    ),
-                  ],
-                ),
+                  );
+                },
               ),
             ),
             SizedBox(height: 20),

@@ -268,12 +268,12 @@ class _ContentState extends State<_Content> {
                               buttonColor: Appcolors.basicColor,
                               onPressed: () {
                                 context.read<ProfileCubit>().editProfile(
-                                      name: nameControlller.text,
-                                      email: emailController.text,
-                                      password: passwordController.text,
-                                      passwordConfirmation:
-                                          confirmPasswordController.text,
-                                    );
+                                  name: nameControlller.text,
+                                  email: emailController.text,
+                                  password: passwordController.text,
+                                  passwordConfirmation:
+                                      confirmPasswordController.text,
+                                );
                               },
                               height: 45,
                               width: double.infinity,

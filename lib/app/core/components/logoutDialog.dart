@@ -12,7 +12,10 @@ class Logoutdialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(create: (context) => AuthCubit(), child: _Content( onConfirm: onConfirm));
+    return BlocProvider(
+      create: (context) => AuthCubit(),
+      child: _Content(onConfirm: onConfirm),
+    );
   }
 }
 

@@ -6,13 +6,13 @@ import 'package:lapanganku/data/model/answer_respon_model/answer_respon_model.da
 class AnswerCubit extends Cubit<AnswerState> {
   AnswerCubit() : super(AnswerState());
 
-  Future<void> submitAnswer({required tugas, required String jawaban}) async {
+  Future<void> submitAnswer({
+    required String tugas,
+    required String jawaban,
+  }) async {
     emit(state.copyWith(isLoading: true));
 
-    // Simulate a network call
-    await Future.delayed(const Duration(seconds: 2));
-
-    var answer = await AnswerService().getAnswer(
+    var answer = await AnswerService().submitAnswer(
       tugas: tugas,
       jawaban: jawaban,
     );
@@ -20,17 +20,14 @@ class AnswerCubit extends Cubit<AnswerState> {
     answer.fold(
       (left) => emit(state.copyWith(errorMessage: left, isLoading: false)),
       (right) {
-        emit(state.copyWith(answerResponModel: right, isLoading: false));
+        emit(
+          state.copyWith(
+            answerResponModel: right,
+            isLoading: false,
+            isSuccess: true,
+          ),
+        );
       },
-    );
-    // Simulate a successful response
-    final answerResponModel = AnswerResponModel(
-      tugasId: tugas,
-      isiJawaban: jawaban,
-    );
-
-    emit(
-      state.copyWith(answerResponModel: answerResponModel, isLoading: false),
     );
   }
 }

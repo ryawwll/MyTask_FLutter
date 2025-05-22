@@ -3,6 +3,7 @@ import 'package:either_dart/either.dart';
 import 'package:lapanganku/data/model/login_respon_model/login_respon_model.dart';
 import 'package:lapanganku/data/model/logout_respon_model.dart';
 import 'package:lapanganku/data/model/register_respon_model/register_respon_model.dart';
+import 'package:lapanganku/data/model/user_respon_model/user_respon_model.dart';
 
 class AuthService {
   final Dio _dio = Dio();
@@ -87,6 +88,16 @@ class AuthService {
       } else {
         return Left('Undhandle Error : ${e.message}');
       }
+    }
+  }
+
+    Future<Either<String, UserResponModel>> getUser() async {
+    try {
+      var response = await _dio.get('/profile');
+      var data = UserResponModel.fromMap(response.data);
+      return Right(data);
+    } catch (e) {
+      return Left(e.toString());
     }
   }
 }

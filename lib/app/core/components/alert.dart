@@ -12,8 +12,9 @@ class Alert extends StatelessWidget {
     required this.title,
     required this.content,
     required this.onPressed,
-    required this.leftButton ,
-    required this.rightButton});
+    required this.leftButton,
+    required this.rightButton,
+  });
 
   @override
   Widget build(BuildContext context) {

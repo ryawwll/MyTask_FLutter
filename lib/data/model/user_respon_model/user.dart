@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:equatable/equatable.dart';
 
-class Siswa extends Equatable {
+class User extends Equatable {
   final int? id;
   final String? name;
   final String? email;
@@ -11,7 +11,7 @@ class Siswa extends Equatable {
   final String? createdAt;
   final String? updatedAt;
 
-  const Siswa({
+  const User({
     this.id,
     this.name,
     this.email,
@@ -21,7 +21,7 @@ class Siswa extends Equatable {
     this.updatedAt,
   });
 
-  factory Siswa.fromMap(Map<String, dynamic> data) => Siswa(
+  factory User.fromMap(Map<String, dynamic> data) => User(
     id: data['id'] as int?,
     name: data['name'] as String?,
     email: data['email'] as String?,
@@ -43,17 +43,17 @@ class Siswa extends Equatable {
 
   /// `dart:convert`
   ///
-  /// Parses the string and returns the resulting Json object as [Siswa].
-  factory Siswa.fromJson(String data) {
-    return Siswa.fromMap(json.decode(data) as Map<String, dynamic>);
+  /// Parses the string and returns the resulting Json object as [User].
+  factory User.fromJson(String data) {
+    return User.fromMap(json.decode(data) as Map<String, dynamic>);
   }
 
   /// `dart:convert`
   ///
-  /// Converts [Siswa] to a JSON string.
+  /// Converts [User] to a JSON string.
   String toJson() => json.encode(toMap());
 
-  Siswa copyWith({
+  User copyWith({
     int? id,
     String? name,
     String? email,
@@ -62,7 +62,7 @@ class Siswa extends Equatable {
     String? createdAt,
     String? updatedAt,
   }) {
-    return Siswa(
+    return User(
       id: id ?? this.id,
       name: name ?? this.name,
       email: email ?? this.email,

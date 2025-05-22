@@ -24,16 +24,15 @@ class ProfileCubit extends Cubit<ProfileState> {
 
     result.fold(
       (left) {
-        emit(state.copyWith(
-          errorMessage: left,
-          isLoading: false,
-        ));
+        emit(state.copyWith(errorMessage: left, isLoading: false));
       },
       (right) {
-        emit(state.copyWith(
-          editProfileResponModel: EditProfileResponModel(),
-          isLoading: false,
-        ));
+        emit(
+          state.copyWith(
+            editProfileResponModel: EditProfileResponModel(),
+            isLoading: false,
+          ),
+        );
       },
     );
 
@@ -46,30 +45,18 @@ class ProfileCubit extends Cubit<ProfileState> {
     );
   }
 
-  Future<void> getProfile(
-    String name,
-  ) async {
+  Future<void> getProfile(String name) async {
     emit(state.copyWith(isLoading: true));
 
-    var result = await EditprofilService().getProfile(
-      name: name,
-    );
+    var result = await EditprofilService().getProfile(name: name);
 
     result.fold(
       (left) {
-        emit(state.copyWith(
-          errorMessage: left,
-          isLoading: false,
-        ));
+        emit(state.copyWith(errorMessage: left, isLoading: false));
       },
       (right) {
-        emit(state.copyWith(
-          editProfileResponModel: right,
-          isLoading: false,
-        ));
+        emit(state.copyWith(editProfileResponModel: right, isLoading: false));
       },
     );
   }
-
-  
 }

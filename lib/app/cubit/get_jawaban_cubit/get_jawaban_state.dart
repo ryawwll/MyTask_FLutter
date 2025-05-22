@@ -8,7 +8,7 @@ class GetJawabanState extends Equatable {
     this.errorMessage = '',
   });
 
-  final GetJawabanResponModel? getJawabanResponModel;
+  final List<GetJawabanResponModel>? getJawabanResponModel;
   final bool isLoading;
   final String errorMessage;
 
@@ -20,15 +20,15 @@ class GetJawabanState extends Equatable {
   ];
 
   GetJawabanState copyWith({
-    GetJawabanResponModel? getJawabanResponModel,
+    List<GetJawabanResponModel>? getJawabanResponModel,
     bool? isLoading,
     String? errorMessage,
   }) {
     return GetJawabanState(
-      getJawabanResponModel: getJawabanResponModel ?? this.getJawabanResponModel,
+      getJawabanResponModel:
+          getJawabanResponModel ?? this.getJawabanResponModel,
       isLoading: isLoading ?? this.isLoading,
       errorMessage: errorMessage ?? this.errorMessage,
     );
   }
 }
-
