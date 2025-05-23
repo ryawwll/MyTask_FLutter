@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import 'package:dio/dio.dart';
 import 'package:either_dart/either.dart';
-import 'package:lapanganku/data/datasource/service/local_storage/local_strorage.dart';
+import 'package:lapanganku/data/datasource/service/local_storage/local_Storage.dart';
 import 'package:lapanganku/data/model/answer_respon_model/answer_respon_model.dart';
 import 'package:lapanganku/data/model/delete_jawaban_respon_model.dart';
 import 'package:lapanganku/data/model/edit_jawaban_respon_model.dart';
@@ -32,7 +32,9 @@ class AnswerService {
         data: {"tugas_id": tugas, "isi_jawaban": jawaban},
       );
       log('success: ${response.data}');
-      return Right(response.data);
+      return Right(
+        AnswerResponModel.fromMap(response.data),
+      );
     } on DioException catch (e) {
       log('error: ${e.response?.data}');
       if (e.response != null) {
@@ -52,7 +54,6 @@ class AnswerService {
           (response.data as List)
               .map((item) => GetJawabanResponModel.fromMap(item))
               .toList();
-      log(result.toString());
 
       return Right(result);
     } on DioException catch (e) {
@@ -72,7 +73,6 @@ class AnswerService {
 
       return Right(EditJawabanResponModel.fromMap(response.data));
     } on DioException catch (e) {
-      print(e.response?.data.toString());
       return Left(e.toString());
     }
   }
@@ -82,7 +82,8 @@ class AnswerService {
   }) async {
     try {
       final response = await _dio.delete('/jawaban/$id');
-      return Right(response.data['message']);
+      return Right(
+          DeleteJawabanResponModel.fromMap(response.data));
     } on DioException catch (e) {
       return Left(e.toString());
     }

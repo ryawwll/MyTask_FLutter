@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:either_dart/either.dart';
-import 'package:lapanganku/data/datasource/service/local_storage/local_strorage.dart';
+import 'package:lapanganku/data/datasource/service/local_storage/local_Storage.dart';
 import 'package:lapanganku/data/model/edit_profile_respon_model/edit_profile_respon_model.dart';
 
 class EditprofilService {

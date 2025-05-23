@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lapanganku/app/core/appColors.dart';
 import 'package:lapanganku/app/cubit/auth_cubit/auth_cubit.dart';
 import 'package:lapanganku/app/cubit/auth_cubit/auth_state.dart';
-import 'package:lapanganku/data/datasource/service/local_storage/local_strorage.dart';
+import 'package:lapanganku/data/datasource/service/local_storage/local_Storage.dart';
 
 class Logoutdialog extends StatelessWidget {
   const Logoutdialog({super.key, required this.onConfirm});

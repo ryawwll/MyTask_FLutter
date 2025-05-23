@@ -265,6 +265,8 @@ class _ContentState extends State<_Content> {
                             SizedBox(height: 50),
                             AppButton(
                               label: 'Edit Profil',
+                              height: 45,
+                              width: double.infinity,
                               buttonColor: Appcolors.basicColor,
                               onPressed: () {
                                 context.read<ProfileCubit>().editProfile(

@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:either_dart/either.dart';
-import 'package:lapanganku/data/datasource/service/local_storage/local_strorage.dart';
+import 'package:lapanganku/data/datasource/service/local_storage/local_Storage.dart';
 import 'package:lapanganku/data/model/login_respon_model/login_respon_model.dart';
 import 'package:lapanganku/data/model/logout_respon_model.dart';
 import 'package:lapanganku/data/model/register_respon_model/register_respon_model.dart';

@@ -4,8 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lapanganku/app/core/appColors.dart';
 import 'package:lapanganku/app/cubit/answer_cubit/answer_cubit.dart';
 import 'package:lapanganku/app/cubit/answer_cubit/answer_state.dart';
-import 'package:lapanganku/app/presentation/edit_answer_screen.dart';
-import 'package:lapanganku/data/model/task_model/task_model.dart';
 
 class AnswerPage extends StatelessWidget {
   const AnswerPage({super.key});
@@ -146,25 +144,6 @@ class _ContentState extends State<_Content> {
                                           '',
                                     ),
                                     Spacer(),
-                                    IconButton(
-                                      onPressed: () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder:
-                                                (context) => BlocProvider(
-                                                  create:
-                                                      (context) =>
-                                                          AnswerCubit(),
-                                                  child: EditAnswerScreen(
-                                                    task: TaskModel(),
-                                                  ),
-                                                ),
-                                          ),
-                                        );
-                                      },
-                                      icon: Icon(Icons.edit),
-                                    ),
                                     IconButton(
                                       onPressed: () {
                                         context.read<AnswerCubit>().deleteJawaban(

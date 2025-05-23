@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:lapanganku/app/cubit/auth_cubit/auth_state.dart';
 import 'package:lapanganku/data/datasource/service/auth_service.dart';
-import 'package:lapanganku/data/datasource/service/local_storage/local_strorage.dart';
+import 'package:lapanganku/data/datasource/service/local_storage/local_Storage.dart';
 
 class AuthCubit extends Cubit<AuthState> {
   AuthCubit() : super(AuthState());
