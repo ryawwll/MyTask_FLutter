@@ -20,8 +20,8 @@ class EditprofilService {
     required String passwordConfirmation,
   }) async {
     try {
-      var response = await dio.post(
-        '/edit-profile',
+      var response = await dio.put(
+        '/profile',
         data: {
           'name': name,
           'email': email,

@@ -263,20 +263,31 @@ class __ContentState extends State<_Content> {
                               ),
                             ),
                             SizedBox(height: 50),
-                            AppButton(
-                              label: 'Register',
-                              buttonColor: Appcolors.basicColor,
-                              onPressed: () {
-                                context.read<AuthCubit>().doRegister(
-                                  name: nameControlller.text,
-                                  email: emailController.text,
-                                  password: passwordController.text,
-                                  password_confirmation:
-                                      confirmPasswordController.text,
+                            BlocBuilder<AuthCubit, AuthState>(
+                              builder: (context, state) {
+                                if (state.isLoading) {
+                                  return Center(
+                                    child: CircularProgressIndicator(
+                                      color: Appcolors.basicColor,
+                                    ),
+                                  );
+                                }
+                                return AppButton(
+                                  label: 'Register',
+                                  buttonColor: Appcolors.basicColor,
+                                  onPressed: () {
+                                    context.read<AuthCubit>().doRegister(
+                                      name: nameControlller.text,
+                                      email: emailController.text,
+                                      password: passwordController.text,
+                                      password_confirmation:
+                                          confirmPasswordController.text,
+                                    );
+                                  },
+                                  height: 45,
+                                  width: double.infinity,
                                 );
                               },
-                              height: 45,
-                              width: double.infinity,
                             ),
                           ],
                         ),

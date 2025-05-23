@@ -4,13 +4,18 @@ import 'package:lapanganku/app/core/appColors.dart';
 import 'package:lapanganku/app/core/components/logoutDialog.dart';
 import 'package:lapanganku/app/cubit/auth_cubit/auth_cubit.dart';
 import 'package:lapanganku/app/cubit/auth_cubit/auth_state.dart';
+import 'package:lapanganku/app/cubit/profile_cubit/profile_cubit.dart';
+import 'package:lapanganku/app/cubit/profile_cubit/profile_state.dart';
 
 class ProfilScreen extends StatelessWidget {
   const ProfilScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(create: (context) => AuthCubit()..getUser(), child: _Content());
+    return BlocProvider(
+      create: (context) => AuthCubit()..getUser(),
+      child: _Content(),
+    );
   }
 }
 
@@ -25,7 +30,6 @@ class _ContentState extends State<_Content> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
       body: Center(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -42,6 +46,12 @@ class _ContentState extends State<_Content> {
               ),
               child: BlocBuilder<AuthCubit, AuthState>(
                 builder: (context, state) {
+                  if (state.isLoading) {
+                    return Center(
+                      child: CircularProgressIndicator(color: Colors.white),
+                    );
+                  }
+
                   return Center(
                     child: Column(
                       children: [
@@ -94,7 +104,6 @@ class _ContentState extends State<_Content> {
                           child: Text(
                             'Edit Profile',
                             style: TextStyle(
-                              color: Colors.black,
                               fontSize: 17,
                               fontWeight: FontWeight.w500,
                             ),
@@ -141,7 +150,6 @@ class _ContentState extends State<_Content> {
                           child: Text(
                             'Log out',
                             style: TextStyle(
-                              color: Colors.black,
                               fontSize: 17,
                               fontWeight: FontWeight.w500,
                             ),

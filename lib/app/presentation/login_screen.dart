@@ -202,17 +202,28 @@ class _ContentState extends State<_Content> {
                               ),
                             ),
                             SizedBox(height: 50),
-                            AppButton(
-                              label: 'Login',
-                              buttonColor: Appcolors.basicColor,
-                              onPressed: () async {
-                                await context.read<AuthCubit>().doLogin(
-                                  email: emailController.text,
-                                  password: passwordController.text,
+                            BlocBuilder<AuthCubit, AuthState>(
+                              builder: (context, state) {
+                                if (state.isLoading) {
+                                  return Center(
+                                    child: CircularProgressIndicator(
+                                      color: Appcolors.basicColor,
+                                    ),
+                                  );
+                                }
+                                return AppButton(
+                                  label: 'Login',
+                                  buttonColor: Appcolors.basicColor,
+                                  onPressed: () async {
+                                    await context.read<AuthCubit>().doLogin(
+                                      email: emailController.text,
+                                      password: passwordController.text,
+                                    );
+                                  },
+                                  height: 45,
+                                  width: double.infinity,
                                 );
                               },
-                              height: 45,
-                              width: double.infinity,
                             ),
                             SizedBox(height: 5),
                             Row(

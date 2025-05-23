@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
 
-class Alert extends StatelessWidget {
+class AlerTask extends StatelessWidget {
   final String title;
   final String content;
-  final VoidCallback onPressed;
   String leftButton;
   String rightButton;
 
-  Alert({
+  AlerTask({
     super.key,
     required this.title,
     required this.content,
-    required this.onPressed,
     required this.leftButton,
     required this.rightButton,
   });
@@ -24,11 +22,13 @@ class Alert extends StatelessWidget {
       content: Text(content),
       actions: <Widget>[
         TextButton(
-          onPressed: onPressed,
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
           child: Text(leftButton, style: TextStyle(color: Colors.red)),
         ),
         TextButton(
-          onPressed: onPressed,
+          onPressed: () {},
           child: Text(rightButton, style: TextStyle(color: Colors.black)),
         ),
       ],

@@ -275,8 +275,6 @@ class _ContentState extends State<_Content> {
                                       confirmPasswordController.text,
                                 );
                               },
-                              height: 45,
-                              width: double.infinity,
                             ),
                             SizedBox(height: 5),
                           ],

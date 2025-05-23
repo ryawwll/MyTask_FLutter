@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:either_dart/either.dart';
+import 'package:lapanganku/data/datasource/service/local_storage/local_strorage.dart';
 import 'package:lapanganku/data/model/login_respon_model/login_respon_model.dart';
 import 'package:lapanganku/data/model/logout_respon_model.dart';
 import 'package:lapanganku/data/model/register_respon_model/register_respon_model.dart';
@@ -91,9 +92,15 @@ class AuthService {
     }
   }
 
-    Future<Either<String, UserResponModel>> getUser() async {
+  Future<Either<String, UserResponModel>> getUser() async {
     try {
-      var response = await _dio.get('/profile');
+      final token = await LocalStrorage().getToken();
+
+      var response = await _dio.get(
+        '/profile',
+        options: Options(headers: {'Authorization': 'Bearer $token'}),
+      );
+
       var data = UserResponModel.fromMap(response.data);
       return Right(data);
     } catch (e) {

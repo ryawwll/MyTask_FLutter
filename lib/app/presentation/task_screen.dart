@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lapanganku/app/core/appColors.dart';
-import 'package:lapanganku/app/core/components/alert.dart';
 import 'package:lapanganku/app/cubit/Task_cubit/task_cubit.dart';
 import 'package:lapanganku/app/cubit/Task_cubit/task_state.dart';
 import 'package:lapanganku/app/cubit/answer_cubit/answer_cubit.dart';
@@ -70,6 +69,8 @@ class _ContentState extends State<_Content> {
 
           SizedBox(height: 20),
 
+          SizedBox(height: 20),
+
           BlocBuilder<TaskCubit, TaskState>(
             builder: (context, state) {
               if (state.isLoading) {
@@ -132,26 +133,41 @@ class _ContentState extends State<_Content> {
                             showDialog(
                               context: context,
                               builder:
-                                  (_) => Alert(
-                                    title: state.taskList[index].judul ?? '',
-                                    content:
-                                        'apakah anda yakin untuk mengerjakan tugas ini?',
-                                    leftButton: 'Cancel',
-                                    rightButton: 'Ok',
-                                    onPressed: () {
-                                      final task = state.taskList[index];
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder:
-                                              (context) => BlocProvider(
-                                                create:
-                                                    (context) => AnswerCubit(),
-                                                child: AnswerScreen(task: task),
-                                              ),
-                                        ),
-                                      );
-                                    },
+                                  (_) => AlertDialog(
+                                    title: Text(
+                                      state.taskList[index].judul ?? '',
+                                    ),
+                                    content: Text(
+                                      'apakah anda yakin untuk mengerjakan tugas ini?',
+                                    ),
+                                    actions: [
+                                      TextButton(
+                                        onPressed: () {
+                                          Navigator.pop(context);
+                                        },
+                                        child: Text('Batal'),
+                                      ),
+                                      TextButton(
+                                        onPressed: () {
+                                          final task = state.taskList[index];
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder:
+                                                  (context) => BlocProvider(
+                                                    create:
+                                                        (context) =>
+                                                            AnswerCubit(),
+                                                    child: AnswerScreen(
+                                                      task: task,
+                                                    ),
+                                                  ),
+                                            ),
+                                          );
+                                        },
+                                        child: Text('Ya'),
+                                      ),
+                                    ],
                                   ),
                             );
                           },

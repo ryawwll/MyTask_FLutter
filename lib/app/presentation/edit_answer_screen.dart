@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lapanganku/app/core/appColors.dart';
@@ -6,14 +7,15 @@ import 'package:lapanganku/app/cubit/answer_cubit/answer_cubit.dart';
 import 'package:lapanganku/app/cubit/answer_cubit/answer_state.dart';
 import 'package:lapanganku/data/model/task_model/task_model.dart';
 
-class AnswerScreen extends StatelessWidget {
-  const AnswerScreen({super.key, required this.task});
+class EditAnswerScreen extends StatelessWidget {
+  const EditAnswerScreen({super.key, this.task = const TaskModel()});
+
   final TaskModel task;
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => AnswerCubit(),
+    return BlocProvider.value(
+      value: context.read<AnswerCubit>(),
       child: _Content(
         task: task.copyWith(
           id: task.id,
@@ -34,59 +36,46 @@ class _Content extends StatefulWidget {
   final TextEditingController answerController = TextEditingController();
 
   @override
-  State<_Content> createState() => _AnswerScreenState();
-
-  void dispose() {
-    answerController.dispose();
-  }
+  State<_Content> createState() => __ContentState();
 }
 
-class _AnswerScreenState extends State<_Content> {
+class __ContentState extends State<_Content> {
   @override
   Widget build(BuildContext context) {
     return BlocListener<AnswerCubit, AnswerState>(
       listenWhen:
           (previous, current) =>
-              current.isSuccess != previous.isSuccess ||
+              previous.editJawabanResponModel !=
+                  current.editJawabanResponModel ||
               current.errorMessage != previous.errorMessage,
       listener: (context, state) {
-        if (state.isSuccess == true) {
-          // Handle successful response
+        if (state.editJawabanResponModel.toString() == 'success') {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: Text(
-                'Answer submitted successfully!',
-                style: TextStyle(color: Colors.white),
-              ),
+              content: Text('Profile updated successfully!'),
               backgroundColor: Colors.green,
             ),
           );
-
-          // Navigator.pushReplacementNamed(context, '/main');
+          Navigator.pushReplacementNamed(context, '/main');
+        } else if (state.errorMessage.isNotEmpty) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(state.errorMessage),
+              backgroundColor: Colors.red,
+            ),
+          );
         }
-
-        // if (state.errorMessage != '') {
-        //   // Handle error response
-        //   ScaffoldMessenger.of(context).showSnackBar(
-        //     SnackBar(
-        //       content: Text(
-        //         state.errorMessage,
-        //         style: TextStyle(color: Colors.white),
-        //       ),
-        //       backgroundColor: Colors.red,
-        //     ),
-        //   );
-        //   // Navigator.pushReplacement(
-        //   //   context,
-        //   //   MaterialPageRoute(builder: (context) => AnswerPage()),
-        //   // );
-        // }
       },
       child: Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
-          automaticallyImplyLeading: false,
-          title: Text('Answer Page', style: TextStyle(color: Colors.white)),
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back, color: Colors.white),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
+          title: Text('Edit answer', style: TextStyle(color: Colors.white)),
           flexibleSpace: Container(
             decoration: BoxDecoration(
               gradient: LinearGradient(
@@ -166,31 +155,13 @@ class _AnswerScreenState extends State<_Content> {
                                 );
                               }
                               return AppButton(
-                                label: 'send',
+                                label: 'Edit Answer',
                                 buttonColor: Appcolors.basicColor,
-                                onPressed: () async {
-                                  if (widget.answerController.text.isEmpty) {
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(
-                                        content: Text(
-                                          'your answer is empty',
-                                          style: TextStyle(color: Colors.white),
-                                        ),
-                                        backgroundColor: Colors.red,
-                                      ),
-                                    );
-                                    return;
-                                  }
-                                  await context
-                                      .read<AnswerCubit>()
-                                      .submitAnswer(
-                                        tugas: widget.task.id.toString(),
-                                        jawaban: widget.answerController.text,
-                                      );
-
-                                  Navigator.pushReplacementNamed(
-                                    context,
-                                    '/main',
+                                onPressed: () {
+                                  context.read<AnswerCubit>().editJawaban(
+                                    jawaban: widget.answerController.text,
+                                    id: state.editJawabanResponModel.id.toString(),
+                                            
                                   );
                                 },
                                 height: 45,

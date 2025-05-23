@@ -4,6 +4,9 @@ import 'package:dio/dio.dart';
 import 'package:either_dart/either.dart';
 import 'package:lapanganku/data/datasource/service/local_storage/local_strorage.dart';
 import 'package:lapanganku/data/model/answer_respon_model/answer_respon_model.dart';
+import 'package:lapanganku/data/model/delete_jawaban_respon_model.dart';
+import 'package:lapanganku/data/model/edit_jawaban_respon_model.dart';
+import 'package:lapanganku/data/model/get_jawaban_respon_model/get_jawaban_respon_model.dart';
 
 class AnswerService {
   final Dio _dio = Dio(
@@ -13,6 +16,7 @@ class AnswerService {
       receiveTimeout: const Duration(seconds: 5),
       headers: {
         'Authorization': 'Bearer ${LocalStrorage().getToken()}',
+        'Accept': 'application/json',
         'Content-Type': 'application/json',
       },
     ),
@@ -22,7 +26,6 @@ class AnswerService {
     required String tugas,
     required String jawaban,
   }) async {
-    print('tugas : $tugas dan $jawaban');
     try {
       final response = await _dio.post(
         '/jawaban',
@@ -39,6 +42,49 @@ class AnswerService {
       }
     } catch (e) {
       return Left('An unexpected error occurred');
+    }
+  }
+
+  Future<Either<String, List<GetJawabanResponModel>>> getJawaban() async {
+    try {
+      var response = await _dio.get('/jawaban');
+      var result =
+          (response.data as List)
+              .map((item) => GetJawabanResponModel.fromMap(item))
+              .toList();
+      log(result.toString());
+
+      return Right(result);
+    } on DioException catch (e) {
+      return Left(e.toString());
+    }
+  }
+
+  Future<Either<String, EditJawabanResponModel>> editJawaban({
+    required String jawaban,
+    required String id,
+  }) async {
+    try {
+      final response = await _dio.put(
+        '/jawaban/$id',
+        data: {'isi_jawaban': jawaban, 'id': id},
+      );
+
+      return Right(EditJawabanResponModel.fromMap(response.data));
+    } on DioException catch (e) {
+      print(e.response?.data.toString());
+      return Left(e.toString());
+    }
+  }
+
+  Future<Either<String, DeleteJawabanResponModel>> deleteJawaban({
+    required String id,
+  }) async {
+    try {
+      final response = await _dio.delete('/jawaban/$id');
+      return Right(response.data['message']);
+    } on DioException catch (e) {
+      return Left(e.toString());
     }
   }
 }

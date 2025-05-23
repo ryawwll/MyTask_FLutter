@@ -2,8 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lapanganku/app/core/appColors.dart';
-import 'package:lapanganku/app/cubit/get_jawaban_cubit/get_jawaban_cubit.dart';
-import 'package:lapanganku/app/cubit/get_jawaban_cubit/get_jawaban_state.dart';
+import 'package:lapanganku/app/cubit/answer_cubit/answer_cubit.dart';
+import 'package:lapanganku/app/cubit/answer_cubit/answer_state.dart';
+import 'package:lapanganku/app/presentation/edit_answer_screen.dart';
+import 'package:lapanganku/data/model/task_model/task_model.dart';
 
 class AnswerPage extends StatelessWidget {
   const AnswerPage({super.key});
@@ -11,7 +13,7 @@ class AnswerPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => GetJawabanCubit()..getJawaban(),
+      create: (context) => AnswerCubit()..getJawaban(),
       child: _Content(),
     );
   }
@@ -69,7 +71,9 @@ class _ContentState extends State<_Content> {
 
             SizedBox(height: 20),
 
-            BlocBuilder<GetJawabanCubit, GetJawabanState>(
+            SizedBox(height: 20),
+
+            BlocBuilder<AnswerCubit, AnswerState>(
               builder: (context, state) {
                 if (state.isLoading) {
                   return Center(
@@ -86,19 +90,15 @@ class _ContentState extends State<_Content> {
                 return Padding(
                   padding: const EdgeInsets.all(16),
                   child: RefreshIndicator(
-                    onRefresh:
-                        () => context.read<GetJawabanCubit>().getJawaban(),
+                    onRefresh: () => context.read<AnswerCubit>().getJawaban(),
                     child: ListView.builder(
                       shrinkWrap: true,
-                      itemCount: state.getJawabanResponModel?.length,
+                      itemCount: state.getJawabanResponList.length,
                       itemBuilder: (context, index) {
                         return Card(
                           child: ListTile(
                             title: Text(
-                              state
-                                      .getJawabanResponModel?[index]
-                                      .tugas
-                                      ?.judul ??
+                              state.getJawabanResponList[index].tugas?.judul ??
                                   '',
                             ),
                             subtitle: Column(
@@ -106,7 +106,7 @@ class _ContentState extends State<_Content> {
                               children: [
                                 Text(
                                   state
-                                          .getJawabanResponModel?[index]
+                                          .getJawabanResponList[index]
                                           .isiJawaban ??
                                       '',
                                 ),
@@ -121,7 +121,7 @@ class _ContentState extends State<_Content> {
                                   child: Center(
                                     child: Text(
                                       state
-                                              .getJawabanResponModel?[index]
+                                              .getJawabanResponList[index]
                                               .nilai
                                               ?.nilai
                                               .toString() ??
@@ -141,11 +141,54 @@ class _ContentState extends State<_Content> {
                                     SizedBox(width: 8),
                                     Text(
                                       state
-                                              .getJawabanResponModel?[index]
+                                              .getJawabanResponList[index]
                                               .createdAt ??
                                           '',
                                     ),
                                     Spacer(),
+                                    IconButton(
+                                      onPressed: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder:
+                                                (context) => BlocProvider(
+                                                  create:
+                                                      (context) =>
+                                                          AnswerCubit(),
+                                                  child: EditAnswerScreen(
+                                                    task: TaskModel(),
+                                                  ),
+                                                ),
+                                          ),
+                                        );
+                                      },
+                                      icon: Icon(Icons.edit),
+                                    ),
+                                    IconButton(
+                                      onPressed: () {
+                                        context.read<AnswerCubit>().deleteJawaban(
+                                          id:
+                                              state
+                                                  .getJawabanResponList[index]
+                                                  .id
+                                                  .toString(),
+                                        );
+                                        ScaffoldMessenger.of(context)
+                                          ..removeCurrentSnackBar()
+                                          ..showSnackBar(
+                                            SnackBar(
+                                              content: Text(
+                                                state.errorMessage.isNotEmpty
+                                                    ? state.errorMessage
+                                                    : 'Jawaban berhasil dihapus',
+                                              ),
+                                              backgroundColor: Colors.green,
+                                            ),
+                                          );
+                                      },
+                                      icon: Icon(Icons.delete),
+                                    ),
                                   ],
                                 ),
                                 SizedBox(height: 10),
